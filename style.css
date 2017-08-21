@@ -1,0 +1,32 @@
+*{
+  border: 2px solid black;
+}
+
+.images {
+  margin-top: auto;
+  display: block;
+}
+.images img{
+  width: 100%
+}
+.image1 {
+   width: 32%;
+  top: 250px;
+  max-height:25px;
+  left: 0px;
+  display: inline-block;
+}
+.image2 {
+  width: 32%;
+  top: 250px;
+  max-height:25px;
+  left: 100px;
+  display: inline-block;
+}
+.image3 {
+  width: 32%;
+  top: 250px;
+  max-height:25px;
+  left: 150px;
+  display: inline-block;
+}
