@@ -5,7 +5,6 @@ function Image (imageName, filePath, imageId){
   this.numShown = 0;
   this.numClicked = 0;
 }
-
 var imageFileList = ['bag.jpg','banana.jpg','bathroom.jpg','boots.jpg',
   'breakfast.jpg','bubblegum.jpg','chair.jpg','cthulhu.jpg','dogDuck.jpg',
   'dragon.jpg','pen.jpg','petSweep.jpg','scissors.jpg','shark.jpg','unicorn.jpg',
@@ -57,25 +56,107 @@ var totalShown = 0;
 function onClick(){
   processClick(event);
 }
-
+var chartImageList = [];
+var numberOfClicked = [];
 function reportResult(){
   var body = document.getElementsByTagName('body')[0];
   for (var i = 0; i < imageList.length; i++){
     var parag = document.createElement('p');
     parag.innerText = imageList[i].imageName + '      has been voted    ' + imageList[i].numClicked + '     times     ' + '   and has been shown    ' + imageList[i].numShown + '    times.';
     body.appendChild(parag);
+    numberOfClicked.push(imageList[i].numClicked);
+    if ( imageList[i].numShown > 0){
+      chartImageList.push(imageList[i].imageName);
+    }
   }
+  var canvas = document.getElementById('canvas');
+  var ctx = canvas.getContext('2d');
+  var chartConfig = {
+    type: 'bar',
+    data: {
+      labels: chartImageList, // x-axis labels for every entry in your data set. It should match up with the number of things you're plotting (if it's a bar chart)
+      datasets: [{ // <-- notice that this can be an array of multiple data sets.
+          // each data set is its own object literal.
+        label: '# of Votes', // <-- the label of this one data set
+        data: numberOfClicked, // <-- where your data actually goes. just the numbers
+        backgroundColor: [ // <-- this can be either one single color or a color for each item in your bar chart.
+          'rgb(191, 191, 63)',
+          'rgb(127, 191, 63)',
+          'rgb(63, 191, 191)',
+          'rgb(63, 63, 191)',
+          'rgb(191, 63, 191)',
+          'rgb(63, 127, 191)',
+          'rgb(63, 127, 191)',
+          'rgb(191, 63, 127)',
+          'rgb(191, 63, 127)',
+          'rgb(191, 63, 191)',
+          'rgba(191, 63, 155, 0.6)',
+          'rgba(63, 178, 191, 0.6)',
+          'rgba(255,99,132,1)',
+          'rgba(54, 162, 235, 1)',
+          'rgba(255, 206, 86, 1)',
+          'rgba(161, 63, 191, 0.6)',
+          'rgba(255, 206, 86, 1)',
+          'rgba(75, 192, 192, 1)',
+          'rgba(153, 102, 255, 1)',
+          'rgba(255, 159, 64, 1)'
+        ],
+        borderColor: [
+          'rgba(255,99,132,1)',
+          'rgba(54, 162, 235, 1)',
+          'rgba(255, 206, 86, 1)',
+          'rgba(75, 192, 192, 1)',
+          'rgba(153, 102, 255, 1)',
+          'rgba(255, 159, 64, 1)',
+          'rgba(255,99,132,1)',
+          'rgba(54, 162, 235, 1)',
+          'rgba(255, 206, 86, 1)',
+          'rgba(75, 192, 192, 1)',
+          'rgba(153, 102, 255, 1)',
+          'rgba(255, 159, 64, 1)',
+          'rgb(127, 191, 63)',
+          'rgb(63, 191, 191)',
+          'rgb(63, 63, 191)',
+          'rgb(191, 63, 191)',
+          'rgb(63, 127, 191)',
+          'rgb(63, 127, 191)',
+          'rgb(191, 63, 127)',
+          'rgb(191, 63, 127)',
+          'rgb(191, 63, 127)',
+          'rgb(191, 63, 191)',
+        ],
+        borderWidth: 5 // border width in pixels
+      }]
+    },
+    options: {
+        // maintainAspectRatio: false,
+        // animation: {
+        //   duration: 1000
+        // },
+      title: {
+        display: true,
+        text: 'Analize of the products'
+      },
+      scales: {
+        yAxes: [{
+          ticks: {
+            beginAtZero:true
+          }
+        }]
+      }
+    }
+  };
+  var myChart = new Chart(ctx, chartConfig);
 }
 
 function processClick(event){
   var imageId = parseInt(event.target.id);
   imageList[imageId].numClicked++;
-  if(totalShown == 3){
+  if(totalShown == 25){
 
-    // disable event listener.
-    for(i = 0; i < 25; i++){
-      document.getElementById(currentImageList[i]).removeEventListener("click",
-       onClick);
+     // disable event listener.
+    for(i = 0; i < currentImageList.length; i++){
+      document.getElementById(currentImageList[i]).removeEventListener('click',onClick);
     }
     reportResult();
     return;
