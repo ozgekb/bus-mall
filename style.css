@@ -1,13 +1,12 @@
-*{
-  border: 2px solid black;
-}
+
 
 .images {
   margin-top: auto;
   display: block;
 }
-.images img{
-  width: 100%
+img{
+  width: 30%;
+  min-height: 200px;
 }
 .image1 {
    width: 32%;
@@ -30,3 +29,31 @@
   left: 150px;
   display: inline-block;
 }
+
+
+
+
+
+
+
+
+
+
+
+/*
+var lastIndex = 0;
+function randomImage() {
+  var theImage = document.getElementById('image1');
+  var imgDir = '/Users/boyraz/myGit/bus-mall/img/';
+  var imgArray = ['bag.jpg','banana.jpg','bathroom.jpg','boots.jpg','breakfast.jpg','bubblegum.jpg','chair.jpg','cthulhu.jpg','dogDuck.jpg','dragon.jpg','pen.jpg','petSweep.jpg','scissors.jpg','shartk.jpg','sweep.png','tauntaun.jpg','usb.gif','waterCan.jpg','wineGlass.jpg'];
+  var imgIndex = 0;
+  if(imgArray.length > 1) {
+    while(imgIndex == lastIndex) {
+      imgIndex = Math.floor(Math.random() * imgArray.length);
+    }
+    lastIndex = imgIndex;
+    var imgPath = imgDir + imgArray[imgIndex];
+    theImage.src = imgPath;
+    theImage.alt = imgArray[imgIndex];
+  }
+}*
