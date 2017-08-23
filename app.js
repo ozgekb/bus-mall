@@ -61,9 +61,9 @@ var numberOfClicked = [];
 function reportResult(){
   var body = document.getElementsByTagName('body')[0];
   for (var i = 0; i < imageList.length; i++){
-    var parag = document.createElement('p');
-    parag.innerText = imageList[i].imageName + '      has been voted    ' + imageList[i].numClicked + '     times     ' + '   and has been shown    ' + imageList[i].numShown + '    times.';
-    body.appendChild(parag);
+    //var parag = document.createElement('p');
+    //parag.innerText = imageList[i].imageName + '      has been voted    ' + imageList[i].numClicked + '     times     ' + '   and has been shown    ' + imageList[i].numShown + '    times.';
+    //body.appendChild(parag);
     numberOfClicked.push(imageList[i].numClicked);
     if ( imageList[i].numShown > 0){
       chartImageList.push(imageList[i].imageName);
@@ -135,7 +135,7 @@ function reportResult(){
         // },
       title: {
         display: true,
-        text: 'Analize of the products'
+        text: 'Analysis of the products'
       },
       scales: {
         yAxes: [{
