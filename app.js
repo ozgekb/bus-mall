@@ -64,12 +64,12 @@ function reportResult(){
     //var parag = document.createElement('p');
     //parag.innerText = imageList[i].imageName + '      has been voted    ' + imageList[i].numClicked + '     times     ' + '   and has been shown    ' + imageList[i].numShown + '    times.';
     //body.appendChild(parag);
-    numberOfClicked.push(imageList[i].numClicked);
     if ( imageList[i].numShown > 0){
+      numberOfClicked.push(imageList[i].numClicked);
       chartImageList.push(imageList[i].imageName);
     }
   }
-  var canvas = document.getElementById('canvas');
+  var canvas = document.createElement('canvas');
   var ctx = canvas.getContext('2d');
   var chartConfig = {
     type: 'bar',
@@ -146,6 +146,7 @@ function reportResult(){
       }
     }
   };
+  body.appendChild(canvas);
   var myChart = new Chart(ctx, chartConfig);
 }
 

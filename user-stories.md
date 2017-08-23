@@ -1,5 +1,5 @@
 USER Stories
-As a marketing research team, I want a webpage that displays three random photos side-by-side-by-side in the browser window from selected photos, so that the focus group participant can chose their favorites.
+As a marketing research team, I want a webpage that displays three random photos side-by-side in the browser window from selected photos, so that the focus group participant can chose their favorites.
 
 As a marketing research team, I want to track how many times each image is displayed and how many times is clicked, so that I can analysis statistic.
 
