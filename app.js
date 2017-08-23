@@ -61,15 +61,15 @@ var numberOfClicked = [];
 function reportResult(){
   var body = document.getElementsByTagName('body')[0];
   for (var i = 0; i < imageList.length; i++){
-    var parag = document.createElement('p');
-    parag.innerText = imageList[i].imageName + '      has been voted    ' + imageList[i].numClicked + '     times     ' + '   and has been shown    ' + imageList[i].numShown + '    times.';
-    body.appendChild(parag);
-    numberOfClicked.push(imageList[i].numClicked);
+    //var parag = document.createElement('p');
+    //parag.innerText = imageList[i].imageName + '      has been voted    ' + imageList[i].numClicked + '     times     ' + '   and has been shown    ' + imageList[i].numShown + '    times.';
+    //body.appendChild(parag);
     if ( imageList[i].numShown > 0){
+      numberOfClicked.push(imageList[i].numClicked);
       chartImageList.push(imageList[i].imageName);
     }
   }
-  var canvas = document.getElementById('canvas');
+  var canvas = document.createElement('canvas');
   var ctx = canvas.getContext('2d');
   var chartConfig = {
     type: 'bar',
@@ -135,7 +135,7 @@ function reportResult(){
         // },
       title: {
         display: true,
-        text: 'Analize of the products'
+        text: 'Analysis of the products'
       },
       scales: {
         yAxes: [{
@@ -146,6 +146,7 @@ function reportResult(){
       }
     }
   };
+  body.appendChild(canvas);
   var myChart = new Chart(ctx, chartConfig);
 }
 
