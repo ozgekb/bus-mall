@@ -156,7 +156,6 @@ function reportResult(){
         // maintainAspectRatio: false,
         // animation: {
         //   duration: 1000
-        // },
       title: {
         display: true,
         text: 'Analysis of the products'
