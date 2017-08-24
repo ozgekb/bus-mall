@@ -11,10 +11,15 @@ var imageFileList = ['bag.jpg','banana.jpg','bathroom.jpg','boots.jpg',
   'sweep.png','tauntaun.jpg','usb.gif','waterCan.jpg','wineGlass.jpg'];
 
 var imageList = [];
-for (var i = 0; i < imageFileList.length; i++){
-  var newImage = new Image(imageFileList[i], 'img/' + imageFileList[i], i);
-  imageList.push(newImage);
+if (localStorage.getItem('main')) {
+  imageList = JSON.parse(localStorage.main);
+} else {
+  for (var i = 0; i < imageFileList.length; i++){
+    var newImage = new Image(imageFileList[i], 'img/' + imageFileList[i], i);
+    imageList.push(newImage);
+  }
 }
+
 var currentImageList = [];
 
 var displayNewImageSet = function (){
@@ -58,6 +63,11 @@ function onClick(){
 }
 var chartImageList = [];
 var numberOfClicked = [];
+// var votesData = [];
+// var nameData = [];
+// var sumVotesData = [];
+// var sumNameData = [];
+
 function reportResult(){
   var body = document.getElementsByTagName('body')[0];
   for (var i = 0; i < imageList.length; i++){
@@ -68,7 +78,21 @@ function reportResult(){
       numberOfClicked.push(imageList[i].numClicked);
       chartImageList.push(imageList[i].imageName);
     }
-  }
+    // if (localStorage.getItem('votes')) {
+    //   for (var j = 0; j < chartImageList.length; j++) {
+    //     sumNameData.push(nameData[i] + numberOfClicked[i]);
+    //     sumVotesData.push(votesData[i] + chartImageList[i]);
+    //   } else {
+    //     votesData = JSON.parse(localStorage.getItem('names'));
+    //     nameData = JSON.parse(localStorage.getItem('votes'));
+      // }
+
+  } localStorage.setItem('main', JSON.stringify(imageList));
+  console.log(localStorage);
+  // }
+  // localStorage.setItem('names',JSON.stringify(sumVotesData));
+  // localStorage.setItem('votes',JSON.stringify(sumNameData));
+
   var canvas = document.createElement('canvas');
   var ctx = canvas.getContext('2d');
   var chartConfig = {
@@ -148,6 +172,7 @@ function reportResult(){
   };
   body.appendChild(canvas);
   var myChart = new Chart(ctx, chartConfig);
+
 }
 
 function processClick(event){
