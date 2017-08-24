@@ -178,6 +178,7 @@ function reportResult(){
 function processClick(event){
   var imageId = parseInt(event.target.id);
   imageList[imageId].numClicked++;
+    totalShown++;
   if(totalShown == 25){
 
      // disable event listener.
@@ -187,7 +188,7 @@ function processClick(event){
     reportResult();
     return;
   }
-  totalShown++;
+
   displayNewImageSet();
 }
 displayNewImageSet();
