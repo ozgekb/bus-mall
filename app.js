@@ -67,43 +67,29 @@ var numberOfClicked = [];
 // var nameData = [];
 // var sumVotesData = [];
 // var sumNameData = [];
+var percentage = [];
 
 function reportResult(){
   var body = document.getElementsByTagName('body')[0];
   for (var i = 0; i < imageList.length; i++){
-    //var parag = document.createElement('p');
-    //parag.innerText = imageList[i].imageName + '      has been voted    ' + imageList[i].numClicked + '     times     ' + '   and has been shown    ' + imageList[i].numShown + '    times.';
-    //body.appendChild(parag);
     if ( imageList[i].numShown > 0){
       numberOfClicked.push(imageList[i].numClicked);
       chartImageList.push(imageList[i].imageName);
+      percentage.push((imageList[i].numClicked / imageList[i].numShown) * 100);
     }
-    // if (localStorage.getItem('votes')) {
-    //   for (var j = 0; j < chartImageList.length; j++) {
-    //     sumNameData.push(nameData[i] + numberOfClicked[i]);
-    //     sumVotesData.push(votesData[i] + chartImageList[i]);
-    //   } else {
-    //     votesData = JSON.parse(localStorage.getItem('names'));
-    //     nameData = JSON.parse(localStorage.getItem('votes'));
-      // }
 
   } localStorage.setItem('main', JSON.stringify(imageList));
   console.log(localStorage);
-  // }
-  // localStorage.setItem('names',JSON.stringify(sumVotesData));
-  // localStorage.setItem('votes',JSON.stringify(sumNameData));
-
   var canvas = document.createElement('canvas');
   var ctx = canvas.getContext('2d');
   var chartConfig = {
     type: 'bar',
     data: {
-      labels: chartImageList, // x-axis labels for every entry in your data set. It should match up with the number of things you're plotting (if it's a bar chart)
-      datasets: [{ // <-- notice that this can be an array of multiple data sets.
-          // each data set is its own object literal.
-        label: '# of Votes', // <-- the label of this one data set
-        data: numberOfClicked, // <-- where your data actually goes. just the numbers
-        backgroundColor: [ // <-- this can be either one single color or a color for each item in your bar chart.
+      labels: chartImageList,
+      datasets: [{
+        label: '# of Votes',
+        data: numberOfClicked,
+        backgroundColor: [
           'rgb(191, 191, 63)',
           'rgb(127, 191, 63)',
           'rgb(63, 191, 191)',
@@ -150,13 +136,14 @@ function reportResult(){
           'rgb(191, 63, 191)',
         ],
         borderWidth: 5 // border width in pixels
+      },{
+        label: 'Percentage',
+        data: percentage,
+        backgroundColor:'rgb(191, 63, 127)',
+        borderWidth: 1
       }]
     },
     options: {
-        // maintainAspectRatio: false,
-        // animation: {
-        //   duration: 1000
-        // },
       title: {
         display: true,
         text: 'Analysis of the products'
@@ -174,21 +161,17 @@ function reportResult(){
   var myChart = new Chart(ctx, chartConfig);
 
 }
-
 function processClick(event){
   var imageId = parseInt(event.target.id);
   imageList[imageId].numClicked++;
-    totalShown++;
+  totalShown++;
   if(totalShown == 25){
-
-     // disable event listener.
     for(i = 0; i < currentImageList.length; i++){
       document.getElementById(currentImageList[i]).removeEventListener('click',onClick);
     }
     reportResult();
     return;
   }
-
   displayNewImageSet();
 }
 displayNewImageSet();
