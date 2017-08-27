@@ -63,10 +63,6 @@ function onClick(){
 }
 var chartImageList = [];
 var numberOfClicked = [];
-// var votesData = [];
-// var nameData = [];
-// var sumVotesData = [];
-// var sumNameData = [];
 var percentage = [];
 
 function reportResult(){
@@ -135,7 +131,7 @@ function reportResult(){
           'rgb(191, 63, 127)',
           'rgb(191, 63, 191)',
         ],
-        borderWidth: 5 // border width in pixels
+        borderWidth: 5
       },{
         label: 'Percentage',
         data: percentage,
